@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Лиды</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/leads.css" />
+  </head>
+  <body class="theme--dark">
+    <header class="page-header">
+      <div class="page-header__logo">
+        <img
+          src="/static/img/logo.svg"
+          alt="Everytech logo"
+          class="page-header__logo-img"
+        />
+      </div>
+
+      <div class="page-header__menu">
+        <nav>
+          <ul class="page-header__menu-list">
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='dashboard'"
+            >
+              дашборд
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='analytics'"
+            >
+              аналитика
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='clients'"
+            >
+              клиенты
+            </li>
+            <li
+              class="page-header__menu-item page-header__menu-item--active"
+              onclick="location.href='leads'"
+            >
+              лиды
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='tasks'">
+              задачи
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='support'"
+            >
+              сопровождение
+            </li>
+          </ul>
+        </nav>
+
+        <div class="page-header__controls" onclick="location.href='profile'">
+          <button class="page-header__profile-btn">
+            <img
+              src="/static/img/profile_logo.svg"
+              alt="User logo"
+              class="page-header__profile-btn-icon"
+            />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="leads-page">
+      <div class="leads-page__header">
+        <div class="leads-page__left-section">
+          <h1 class="leads-page__header-title">лиды</h1>
+          <div class="leads-page__controls">
+            <select id="statusFilter" class="leads-page__header-select">
+              <option value="all">Все статусы</option>
+              <option value="1">В работе</option>
+              <option value="2">Заморожен</option>
+              <option value="3">Выполнено</option>
+            </select>
+            <button id="addLeadBtn" class="leads-page__header-btn">
+              + Добавить лид
+            </button>
+          </div>
+        </div>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Поиск по названию"
+          class="leads-page__search"
+        />
+      </div>
+      <div class="leads-page__table-container">
+        <table class="leads-page__table">
+          <thead>
+            <tr>
+              <th>название</th>
+              <th>запрос</th>
+              <th>приоритет</th>
+              <th>обработать до</th>
+              <th>статус</th>
+              <th>действия</th>
+            </tr>
+          </thead>
+          <tbody id="leadTableList"></tbody>
+        </table>
+      </div>
+
+      <!-- Модалка добавления лида -->
+      <div class="leads-page__modal">
+        <div class="leads-page__modal-content">
+          <h3 class="leads-page__modal-title">добавить лид</h3>
+          <input type="text" id="leadName" placeholder="Название" required />
+          <div class="leads-page__modal-contacts">
+            <input type="email" id="leadEmail" placeholder="E-mail" required />
+            <input type="tel" id="leadPhone" placeholder="Телефон" />
+          </div>
+          <input type="text" id="leadRequest" placeholder="Запрос" required />
+          <div class="leads-page__modal-info">
+            <select id="leadSource" required>
+              <option value="">Источник</option>
+            </select>
+            <input type="number" id="leadPrice" placeholder="Стоимость" />
+          </div>
+          <label for="leadDeadline">
+            Обработать до:
+            <input
+              type="date"
+              id="leadDeadline"
+              class="leadDeadline--display"
+              required
+            />
+          </label>
+          <div class="leads-page__modal-info">
+            <select id="leadUser" required>
+              <option value="">Ответственный</option>
+            </select>
+            <select id="leadPriority" required>
+              <option value="">Приоритет</option>
+            </select>
+          </div>
+          <textarea id="leadNotes" placeholder="Комментарии/Заметки"></textarea>
+          <div class="leads-page__modal-btn">
+            <button id="saveLeadBtn">добавить</button>
+            <button id="closeModalBtn">отмена</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Модалка просмотра лида -->
+      <div class="leads-page__modal leads-page__modal--view">
+        <div class="leads-page__modal-content">
+          <h3 class="leads-page__modal-title">просмотр лида</h3>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Название:</span>
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadName"
+            ></span>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">E-mail:</span>
+            <a
+              class="leads-page__modal-field-value"
+              id="viewLeadEmail"
+              href="#"
+            ></a>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Телефон:</span>
+            <a
+              class="leads-page__modal-field-value"
+              id="viewLeadPhone"
+              href="#"
+            ></a>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Запрос:</span>
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadRequest"
+            ></span>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Стоимость:</span>
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadPrice"
+            ></span>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Источник:</span>
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadSource"
+            ></span>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Обработать до:</span>
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadDeadline"
+            ></span>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Ответственный:</span>
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadUser"
+            ></span>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Приоритет:</span>
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadPriority"
+            ></span>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Статус:</span>
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadStatus"
+            ></span>
+          </div>
+          <div class="leads-page__modal-field">
+            <span class="leads-page__modal-field-label">Дата создания:</span>
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadCreatedDate"
+            ></span>
+          </div>
+          <div class="leads-page__modal-field leads-page__modal-field--notes">
+            <span class="leads-page__modal-field-label"
+              >Комментарии/Заметки:</span
+            >
+            <span
+              class="leads-page__modal-field-value"
+              id="viewLeadNotes"
+            ></span>
+          </div>
+          <div class="leads-page__modal-btn">
+            <button id="closeViewModalBtn">закрыть</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Модалка редактирования лида -->
+      <div class="leads-page__modal leads-page__modal--edit">
+        <div class="leads-page__modal-content">
+          <h3 class="leads-page__modal-title">редактировать лид</h3>
+          <input
+            type="text"
+            id="editLeadName"
+            placeholder="Название"
+            required
+          />
+          <div class="leads-page__modal-contacts">
+            <input
+              type="email"
+              id="editLeadEmail"
+              placeholder="E-mail"
+              required
+            />
+            <input type="tel" id="editLeadPhone" placeholder="Телефон" />
+          </div>
+          <input type="text" id="editLeadRequest" />
+          <div class="leads-page__modal-info">
+            <select id="editLeadSource" required>
+              <option value="">Источник</option>
+            </select>
+            <input type="number" id="editLeadPrice" placeholder="Стоимость" />
+          </div>
+          <label for="editLeadDeadline">
+            Обработать до:
+            <input
+              type="date"
+              id="editLeadDeadline"
+              class="leadDeadline--display"
+              required
+            />
+          </label>
+          <div class="leads-page__modal-info">
+            <select id="editLeadUser" required>
+              <option value="">Ответственный</option>
+            </select>
+            <select id="editLeadPriority" required>
+              <option value="">Приоритет</option>
+            </select>
+          </div>
+          <textarea
+            id="editLeadNotes"
+            placeholder="Комментарии/Заметки"
+          ></textarea>
+          <div class="leads-page__modal-btn">
+            <button id="saveEditLeadBtn">сохранить</button>
+            <button id="closeEditModalBtn">отмена</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Модалка подтверждения удаления -->
+      <div class="leads-page__modal leads-page__modal--delete">
+        <div class="leads-page__modal-content">
+          <h3 class="leads-page__modal-title">подтверждение удаления</h3>
+          <p class="leads-page__modal-message">
+            Вы уверены, что хотите удалить этот лид?
+          </p>
+          <div class="leads-page__modal-btn">
+            <button id="confirmDeleteBtn" class="leads-page__modal-btn--danger">
+              удалить
+            </button>
+            <button id="cancelDeleteBtn">отмена</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="/static/js/leads.js"></script>
+  </body>
+</html>

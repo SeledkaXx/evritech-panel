@@ -1,0 +1,554 @@
+.support-page {
+  padding: 3rem 0 0 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.support-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.support-page__left-section {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.support-page__title {
+  font-size: 55px;
+  font-weight: 300;
+  color: #b9d043;
+  user-select: none;
+  cursor: default;
+}
+
+.support-page__controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.support-page__filter,
+.support-page__search,
+.support-page__btn {
+  padding: 0 0.7rem;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  color: #ccc;
+  font-weight: 400;
+  background-color: #2c3f48;
+  border-radius: 30px;
+  border: none;
+  margin-top: 7px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.support-page__search {
+  padding: 0 0 0 1.5rem;
+  position: absolute;
+  right: 2rem;
+}
+
+/* Таблица */
+.support-page__table-container {
+  max-height: 720px;
+  overflow-y: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: "Montserrat", sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-top: 1rem;
+}
+
+.support-page__table-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.support-page__table-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.support-page__table-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.support-page__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.support-page__table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.support-page__table th,
+.support-page__table td {
+  padding: 1rem;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.support-page__table th {
+  background-color: #0c2936;
+  color: #b9d043;
+  font-size: 25px;
+  font-weight: 300;
+  border-bottom: 2px solid rgba(185, 208, 67, 0.5);
+  user-select: none;
+  cursor: default;
+}
+
+/* Чередование цветов строк */
+.support-page__table tbody tr:nth-child(odd) td {
+  background-color: #2c3f48;
+}
+
+.support-page__table tbody tr:nth-child(even) td {
+  background-color: #25353d;
+}
+
+/* Подсветка строки при наведении */
+.support-page__table tbody tr:hover td {
+  background-color: #3a4d56;
+}
+
+.support-page__table td {
+  color: #ccc;
+  font-size: 20px;
+  font-weight: normal;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  user-select: none;
+  cursor: pointer;
+  line-height: 1.5;
+  text-align: center;
+  padding: 2rem 0 1rem 0;
+}
+
+/* Отключаем курсор pointer для некликабельных ячеек */
+.support-page__table td.status-cell,
+.support-page__table td.actions-cell,
+.support-page__table td.attachments-cell {
+  cursor: default;
+}
+
+/* Grid для заголовков */
+.support-page__table thead tr {
+  display: grid;
+  grid-template-columns: 20% 10% 20% 20% 15% 15%;
+  width: 100%;
+}
+
+/* Grid для строк */
+.support-page__table tbody {
+  display: block;
+  width: 100%;
+}
+
+.support-page__table tbody tr {
+  display: grid;
+  grid-template-columns: 20% 10% 20% 20% 15% 15%;
+  width: 100%;
+}
+
+/* Стили для столбца статуса */
+.support-page__table td.status-cell {
+  display: flex;
+  justify-content: center;
+}
+
+.support-page__table td.status-cell img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.support-page__table td.status-cell img:hover {
+  transform: scale(1.1);
+}
+
+.support-page__table td.status-cell img:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0c2936;
+  color: #b9d043;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 20;
+}
+
+/* Стили для столбца контактов */
+.support-page__table td.contacts-cell {
+  padding: 1rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.support-page__table td.contacts-cell a {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* Стили для столбцов вложений и действий */
+.support-page__table td.actions-cell,
+.support-page__table td.attachments-cell {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.support-page__table td.actions-cell img,
+.support-page__table td.attachments-cell img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  position: relative;
+  padding: 0.3rem;
+  border-radius: 50%;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.support-page__table td.actions-cell img[alt="Редактировать"] {
+  background-color: rgba(163, 186, 59, 0.2);
+}
+
+.support-page__table td.attachments-cell img[alt="Вложения"] {
+  background-color: rgba(46, 196, 182, 0.2);
+}
+
+.support-page__table td.actions-cell img[alt="Удалить"] {
+  background-color: rgba(230, 57, 70, 0.2);
+}
+
+.support-page__table td.actions-cell img:hover,
+.support-page__table td.attachments-cell img:hover {
+  transform: scale(1.1);
+}
+
+.support-page__table td.actions-cell img[alt="Редактировать"]:hover {
+  background-color: rgba(163, 186, 59, 0.4);
+}
+
+.support-page__table td.attachments-cell img[alt="Вложения"]:hover {
+  background-color: rgba(46, 196, 182, 0.4);
+}
+
+.support-page__table td.actions-cell img[alt="Удалить"]:hover {
+  background-color: rgba(230, 57, 70, 0.4);
+}
+
+/* Всплывающие подсказки для иконок действий */
+.support-page__table td.actions-cell img:hover::after,
+.support-page__table td.attachments-cell img:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #0c2936;
+  color: #b9d043;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 20;
+}
+
+.support-page__table td {
+  transition: background-color 0.2s ease;
+}
+
+.support-page__table td a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease, text-decoration 0.3s ease;
+}
+
+.support-page__table td a:hover {
+  color: #b9d043;
+  text-decoration: underline;
+  transform: scale(1.1);
+}
+
+.support-page__table td.actions-cell img,
+.support-page__table td.attachments-cell img,
+.support-page__table td.status-cell img {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.support-page__table td.actions-cell img:hover,
+.support-page__table td.attachments-cell img:hover,
+.support-page__table td.status-cell img:hover {
+  opacity: 0.8;
+}
+
+/* Модалки */
+.support-page__modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: "Montserrat", sans-serif;
+}
+
+.support-page__modal.support-page__modal--visible {
+  display: flex;
+}
+
+.support-page__modal-content {
+  display: flex;
+  width: 600px;
+  height: fit-content;
+  background-color: #0c2936;
+  color: #000;
+  border-radius: 12px;
+  z-index: 1000;
+  padding: 2rem;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s ease;
+}
+
+.support-page__modal-content input,
+.support-page__modal-content select,
+.support-page__modal-content textarea {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #2c3f48;
+  color: #ccc;
+  font-size: 20px;
+}
+
+.support-page__modal-content label {
+  color: #ccc;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.supportDeadline--display {
+  width: 75%;
+}
+
+.support-page__modal-title {
+  color: #b9d043;
+  font-size: 40px;
+  align-self: center;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.support-page__modal-contacts {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.support-page__modal-contacts input,
+.support-page__modal-contacts select {
+  width: 100%;
+}
+
+.support-page__modal-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.support-page__modal-info select {
+  width: 100%;
+}
+
+.support-page__modal-btn {
+  align-self: center;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.support-page__modal-btn button {
+  padding: 0.5rem;
+  background-color: #b9d043;
+  color: #0f2734;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 100%;
+}
+
+.support-page__modal-btn--danger {
+  background-color: #e63946;
+  color: #fff;
+}
+
+.support-page__modal-message {
+  color: #ccc;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Стили для модалки просмотра */
+.support-page__modal--view .support-page__modal-content {
+  width: 600px;
+  padding: 1.5rem;
+  gap: 0.5rem;
+}
+
+.support-page__modal--view .support-page__modal-title {
+  font-size: 28px;
+  background: linear-gradient(90deg, #0c2936, #14364a);
+}
+
+.support-page__modal--view .support-page__modal-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-size: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: opacity 0.2s ease;
+  position: relative;
+}
+
+.support-page__modal--view .support-page__modal-field:last-child {
+  border-bottom: none;
+}
+
+.support-page__modal--view .support-page__modal-field-label {
+  font-weight: 100;
+  color: #a3ba3b;
+  min-width: 120px;
+}
+
+.support-page__modal--view .support-page__modal-field-value {
+  font-weight: 400;
+  color: #ccc;
+  text-align: right;
+  flex-grow: 1;
+  word-break: break-word;
+  position: relative;
+}
+
+.support-page__modal--view .support-page__modal-field-value a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease, text-decoration 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.support-page__modal--view .support-page__modal-field-value a:hover {
+  color: #b9d043;
+  text-decoration: underline;
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.support-page__modal--view .support-page__modal-field--notes {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.support-page__modal--view
+  .support-page__modal-field--notes
+  .support-page__modal-field-value {
+  white-space: pre-wrap;
+  text-align: left;
+  max-height: 100px;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+}
+
+/* Стили для модалки подтверждения удаления */
+.support-page__modal--delete .support-page__modal-content {
+  text-align: center;
+}
+
+.support-page__modal--delete .support-page__modal-btn--confirm {
+  justify-content: center;
+}
+
+.support-page__modal--delete .support-page__modal-btn--danger {
+  margin-right: 0.5rem;
+}
+
+/* Стили для модалки вложений */
+.support-page__modal--attachments .support-page__modal-content {
+  width: 600px;
+  padding: 1.5rem;
+}
+
+.support-page__modal--attachments .support-page__modal-title {
+  font-size: 28px;
+  background: linear-gradient(90deg, #0c2936, #14364a);
+}
+
+.support-page__modal--attachments #attachmentsList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.support-page__modal--attachments .attachment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #2c3f48;
+  border-radius: 8px;
+  color: #ccc;
+  font-size: 16px;
+}
+
+.support-page__modal--attachments .attachment-item a {
+  color: #ccc;
+}
+
+.support-page__modal--attachments .attachment-item a:hover {
+  color: #b9d043;
+}
+
+.support-page__modal--attachments .attachment-item img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.support-page__modal--attachments .attachment-item img:hover {
+  transform: scale(1.1);
+}
+
+.support-page__modal--attachments p {
+  color: #ccc;
+  font-size: 20px;
+}

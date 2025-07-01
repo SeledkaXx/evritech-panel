@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Задачи</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/tasks.css" />
+  </head>
+  <body class="theme--dark">
+    <!-- ШАПКА -->
+    <header class="page-header">
+      <div class="page-header__logo">
+        <img
+          src="/static/img/logo.svg"
+          alt="Everytech logo"
+          class="page-header__logo-img"
+        />
+      </div>
+      <div class="page-header__menu">
+        <nav>
+          <ul class="page-header__menu-list">
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='dashboard'"
+            >
+              дашборд
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='analytics'"
+            >
+              аналитика
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='clients'"
+            >
+              клиенты
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='leads'">
+              лиды
+            </li>
+            <li
+              class="page-header__menu-item page-header__menu-item--active"
+              onclick="location.href='tasks'"
+            >
+              задачи
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='support'"
+            >
+              сопровождение
+            </li>
+          </ul>
+        </nav>
+        <div class="page-header__controls" onclick="location.href='profile'">
+          <button class="page-header__profile-btn">
+            <img
+              src="/static/img/profile_logo.svg"
+              alt="User logo"
+              class="page-header__profile-btn-icon"
+            />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- КОНТЕНТ -->
+    <main class="tasks-page">
+      <section class="tasks-panel">
+        <div class="tasks-panel__header">
+          <h1 class="tasks-panel__title">личные задачи</h1>
+          <div class="tasks-panel__controls">
+            <select id="filterPersonal">
+              <option value="all">Все</option>
+              <option value="done">Выполненные</option>
+              <option value="active">Активные</option>
+            </select>
+            <button id="addTaskBtn">+ Добавить</button>
+          </div>
+        </div>
+        <div class="tasks-panel__table-container">
+          <ul class="tasks-panel__list" id="personalTasks"></ul>
+        </div>
+      </section>
+
+      <section class="tasks-panel">
+        <div class="tasks-panel__header">
+          <h1 class="tasks-panel__title">общие задачи</h1>
+          <div class="tasks-panel__controls">
+            <select id="filterShared">
+              <option value="all">Все</option>
+              <option value="done">Выполненные</option>
+              <option value="active">Активные</option>
+            </select>
+            <button id="addTaskBtnShared">+ Добавить</button>
+          </div>
+        </div>
+        <div class="tasks-panel__table-container">
+          <ul class="tasks-panel__list" id="sharedTasks"></ul>
+        </div>
+      </section>
+    </main>
+
+    <!-- МОДАЛКА ДОБАВЛЕНИЯ -->
+    <div class="tasks-page__modal" id="taskModal">
+      <div class="tasks-page__modal-content">
+        <h3 class="tasks-page__modal-title">добавить задачу</h3>
+        <input
+          type="text"
+          id="taskTitle"
+          placeholder="Название задачи"
+          required
+        />
+        <textarea id="taskDescription" placeholder="Описание задачи"></textarea>
+        <input type="text" id="taskClient" placeholder="Клиент / проект" />
+        <div class="tasks-page__modal-row">
+          <label for="taskDeadline">
+            Дедлайн:
+            <input
+              type="date"
+              id="taskDeadline"
+              class="taskDeadline--display"
+            />
+          </label>
+          <label class="tasks-page__checkbox">
+            <input type="checkbox" id="taskShared" />
+            Общая задача
+          </label>
+        </div>
+        <!-- Селект пользователь, только для общих -->
+        <div
+          class="tasks-page__modal-info"
+          id="userSection"
+          style="display: none"
+        >
+          <select id="taskUser" required>
+            <!-- Изменение: taskUser вместо taskAssignee -->
+            <option value="" disabled selected>Пользователь</option>
+          </select>
+        </div>
+        <div class="tasks-page__modal-btn">
+          <button id="saveTaskBtn">добавить</button>
+          <button id="closeTaskModalBtn">отмена</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- МОДАЛКА ИНФОРМАЦИИ -->
+    <div class="tasks-page__modal tasks-page__modal--view" id="taskInfoModal">
+      <div class="tasks-page__modal-content">
+        <h3 class="tasks-page__modal-title">информация о задаче</h3>
+        <div class="tasks-page__modal-field">
+          <span class="tasks-page__modal-field-label">Название:</span>
+          <span class="tasks-page__modal-field-value" id="taskInfoTitle"></span>
+        </div>
+        <div class="tasks-page__modal-field">
+          <span class="tasks-page__modal-field-label">Описание:</span>
+          <span
+            class="tasks-page__modal-field-value"
+            id="taskInfoDescription"
+          ></span>
+        </div>
+        <div class="tasks-page__modal-field">
+          <span class="tasks-page__modal-field-label">Дата создания:</span>
+          <span
+            class="tasks-page__modal-field-value"
+            id="taskInfoCreatedDate"
+          ></span>
+          <!-- Изменение: taskInfoCreatedDate вместо taskInfoDate -->
+        </div>
+        <div class="tasks-page__modal-field">
+          <span class="tasks-page__modal-field-label">Дедлайн:</span>
+          <span
+            class="tasks-page__modal-field-value"
+            id="taskInfoDeadline"
+          ></span>
+        </div>
+        <div class="tasks-page__modal-field">
+          <span class="tasks-page__modal-field-label">Клиент / проект:</span>
+          <span
+            class="tasks-page__modal-field-value"
+            id="taskInfoClient"
+          ></span>
+        </div>
+        <!-- Пользователь для общих -->
+        <div
+          class="tasks-page__modal-field"
+          id="taskInfoUserField"
+          style="display: none"
+        >
+          <span class="tasks-page__modal-field-label">Пользователь:</span>
+          <!-- Изменение: Пользователь вместо Ответственный -->
+          <span class="tasks-page__modal-field-value" id="taskInfoUser"></span>
+        </div>
+        <div class="tasks-page__modal-btn">
+          <button id="closeTaskInfoBtn">закрыть</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- МОДАЛКА ПОДТВЕРЖДЕНИЯ УДАЛЕНИЯ -->
+    <div
+      class="tasks-page__modal tasks-page__modal--delete"
+      id="deleteTaskModal"
+    >
+      <div class="tasks-page__modal-content">
+        <h3 class="tasks-page__modal-title">подтверждение удаления</h3>
+        <p class="tasks-page__modal-message">
+          Вы уверены, что хотите удалить эту задачу?
+        </p>
+        <div class="tasks-page__modal-btn">
+          <button
+            id="confirmDeleteTaskBtn"
+            class="tasks-page__modal-btn--danger"
+          >
+            удалить
+          </button>
+          <button id="cancelDeleteTaskBtn">отмена</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/js/tasks.js"></script>
+  </body>
+</html>

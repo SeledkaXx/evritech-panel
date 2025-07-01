@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Клиенты</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/clients.css" />
+  </head>
+  <body class="theme--dark">
+    <header class="page-header">
+      <div class="page-header__logo">
+        <img
+          src="/static/img/logo.svg"
+          alt="Everytech logo"
+          class="page-header__logo-img"
+        />
+      </div>
+
+      <div class="page-header__menu">
+        <nav>
+          <ul class="page-header__menu-list">
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='dashboard'"
+            >
+              дашборд
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='analytics'"
+            >
+              аналитика
+            </li>
+            <li
+              class="page-header__menu-item page-header__menu-item--active"
+              onclick="location.href='clients'"
+            >
+              клиенты
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='leads'">
+              лиды
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='tasks'">
+              задачи
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='support'"
+            >
+              сопровождение
+            </li>
+          </ul>
+        </nav>
+
+        <div class="page-header__controls" onclick="location.href='profile'">
+          <button class="page-header__profile-btn">
+            <img
+              src="/static/img/profile_logo.svg"
+              alt="User logo"
+              class="page-header__profile-btn-icon"
+            />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="clients-page">
+      <div class="clients-page__header">
+        <div class="clients-page__left-section">
+          <h1 class="clients-page__title">клиенты</h1>
+          <div class="clients-page__controls">
+            <select id="statusFilter" class="clients-page__filter">
+              <option value="">Все статусы</option>
+              <option value="1">В работе</option>
+              <option value="2">Заморожен</option>
+              <option value="3">Выполнено</option>
+            </select>
+            <button id="addClientBtn" class="clients-page__btn">
+              + Добавить клиента
+            </button>
+          </div>
+        </div>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Поиск по названию"
+          class="clients-page__search"
+        />
+      </div>
+      <div class="clients-page__table-container">
+        <table class="clients-page__table">
+          <thead>
+            <tr>
+              <th>название</th>
+              <th>вложения</th>
+              <th>контакты</th>
+              <th>приоритет</th>
+              <th>завершить до</th>
+              <th>статус</th>
+              <th>действия</th>
+            </tr>
+          </thead>
+          <tbody id="clientList"></tbody>
+        </table>
+      </div>
+      <!-- Модалка добавления клиента -->
+      <div class="clients-page__modal">
+        <div class="clients-page__modal-content">
+          <h3 class="clients-page__modal-title">добавить клиента</h3>
+          <input type="text" id="clientName" placeholder="Название" required />
+          <div class="clients-page__modal-contacts">
+            <input type="email" id="clientEmail" placeholder="E-mail" />
+            <input type="tel" id="clientPhone" placeholder="Телефон" />
+          </div>
+          <div class="clients-page__modal-contacts">
+            <select id="clientService">
+              <option value="">Услуга</option>
+            </select>
+            <input type="number" id="clientPrice" placeholder="Стоимость" />
+          </div>
+          <label for="clientDeadline">
+            Завершить до:
+            <input
+              type="date"
+              id="clientDeadline"
+              class="clientDeadline--display"
+            />
+          </label>
+          <div class="clients-page__modal-info">
+            <select id="clientUser" required>
+              <!-- Изменение: clientUser вместо clientManager -->
+              <option value="">Ответственный</option>
+            </select>
+            <select id="clientPriority">
+              <option value="">Приоритет</option>
+            </select>
+          </div>
+          <textarea
+            id="clientNotes"
+            placeholder="Комментарии/Заметки"
+          ></textarea>
+          <div class="clients-page__modal-btn">
+            <button id="saveClientBtn">добавить</button>
+            <button id="closeModalBtn">закрыть</button>
+          </div>
+        </div>
+      </div>
+      <!-- Модалка просмотра клиента -->
+      <div class="clients-page__modal clients-page__modal--view">
+        <div class="clients-page__modal-content">
+          <h3 class="clients-page__modal-title">просмотр клиента</h3>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">Название:</span>
+            <span
+              class="clients-page__modal-field-value"
+              id="viewClientName"
+            ></span>
+          </div>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">E-mail:</span>
+            <a
+              class="clients-page__modal-field-value"
+              id="viewClientEmail"
+              href="#"
+            ></a>
+          </div>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">Телефон:</span>
+            <a
+              class="clients-page__modal-field-value"
+              id="viewClientPhone"
+              href="#"
+            ></a>
+          </div>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">Услуга:</span>
+            <span
+              class="clients-page__modal-field-value"
+              id="viewClientService"
+            ></span>
+          </div>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">Стоимость:</span>
+            <span
+              class="clients-page__modal-field-value"
+              id="viewClientPrice"
+            ></span>
+          </div>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">Завершить до:</span>
+            <span
+              class="clients-page__modal-field-value"
+              id="viewClientDeadline"
+            ></span>
+          </div>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">Ответственный:</span>
+            <span
+              class="clients-page__modal-field-value"
+              id="viewClientUser"
+            ></span>
+          </div>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">Приоритет:</span>
+            <span
+              class="clients-page__modal-field-value"
+              id="viewClientPriority"
+            ></span>
+          </div>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">Статус:</span>
+            <span
+              class="clients-page__modal-field-value"
+              id="viewClientStatus"
+            ></span>
+          </div>
+          <div class="clients-page__modal-field">
+            <span class="clients-page__modal-field-label">Дата создания:</span>
+            <span
+              class="clients-page__modal-field-value"
+              id="viewClientCreatedDate"
+            ></span>
+          </div>
+          <div
+            class="clients-page__modal-field clients-page__modal-field--notes"
+          >
+            <span class="clients-page__modal-field-label"
+              >Комментарии/Заметки:</span
+            >
+            <span
+              class="clients-page__modal-field-value"
+              id="viewClientNotes"
+            ></span>
+          </div>
+          <div class="clients-page__modal-btn">
+            <button id="closeViewModalBtn">закрыть</button>
+          </div>
+        </div>
+      </div>
+      <!-- Модалка редактирования клиента -->
+      <div class="clients-page__modal clients-page__modal--edit">
+        <div class="clients-page__modal-content">
+          <h3 class="clients-page__modal-title">редактировать клиента</h3>
+          <input
+            type="text"
+            id="editClientName"
+            placeholder="Название"
+            required
+          />
+          <div class="clients-page__modal-contacts">
+            <input type="email" id="editClientEmail" placeholder="E-mail" />
+            <input type="tel" id="editClientPhone" placeholder="Телефон" />
+          </div>
+          <div class="clients-page__modal-contacts">
+            <select id="editClientService">
+              <option value="">Услуга</option>
+            </select>
+            <input type="number" id="editClientPrice" placeholder="Стоимость" />
+          </div>
+          <label for="editClientDeadline">
+            Завершить до:
+            <input
+              class="clientDeadline--display"
+              type="date"
+              id="editClientDeadline"
+            />
+          </label>
+          <div class="clients-page__modal-info">
+            <select id="editClientUser" required>
+              <!-- Изменение: editClientUser вместо editClientManager -->
+              <option value="">Ответственный</option>
+            </select>
+            <select id="editClientPriority">
+              <option value="">Приоритет</option>
+            </select>
+          </div>
+          <textarea
+            id="editClientNotes"
+            placeholder="Комментарии/Заметки"
+          ></textarea>
+          <div class="clients-page__modal-btn">
+            <button id="saveEditClientBtn">сохранить</button>
+            <button id="closeEditModalBtn">отмена</button>
+          </div>
+        </div>
+      </div>
+      <!-- Модалка подтверждения удаления -->
+      <div class="clients-page__modal clients-page__modal--delete">
+        <div class="clients-page__modal-content">
+          <h3 class="clients-page__modal-title">подтверждение удаления</h3>
+          <p class="clients-page__modal-message">
+            Вы уверены, что хотите удалить этого клиента?
+          </p>
+          <div class="clients-page__modal-btn">
+            <button
+              id="confirmDeleteBtn"
+              class="clients-page__modal-btn--danger"
+            >
+              удалить
+            </button>
+            <button id="cancelDeleteBtn">отмена</button>
+          </div>
+        </div>
+      </div>
+      <!-- Модалка вложений -->
+      <div class="clients-page__modal clients-page__modal--attachments">
+        <div class="clients-page__modal-content" id="attachmentsContent">
+          <h3 class="clients-page__modal-title">вложения</h3>
+          <div id="attachmentsList"></div>
+          <div class="clients-page__modal-btn">
+            <button id="addAttachmentBtn">добавить</button>
+            <button id="closeAttachmentsModalBtn">закрыть</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="/static/js/clients.js"></script>
+  </body>
+</html>

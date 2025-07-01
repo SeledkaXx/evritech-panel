@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/profile.css" />
+  </head>
+  <body class="theme--dark">
+    <header class="page-header">
+      <div class="page-header__logo">
+        <img
+          src="/static/img/logo.svg"
+          alt="Everytech logo"
+          class="page-header__logo-img"
+        />
+      </div>
+
+      <div class="page-header__menu">
+        <nav>
+          <ul class="page-header__menu-list">
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='dashboard'"
+            >
+              дашборд
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='analytics'"
+            >
+              аналитика
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='clients'"
+            >
+              клиенты
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='leads'">
+              лиды
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='tasks'">
+              задачи
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='support'"
+            >
+              сопровождение
+            </li>
+          </ul>
+        </nav>
+
+        <div class="page-header__controls" onclick="location.href='profile'">
+          <button class="page-header__profile-btn">
+            <img
+              src="/static/img/profile_logo.svg"
+              alt="User logo"
+              class="page-header__profile-btn-icon"
+            />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ПРОФИЛЬ -->
+    <main class="profile">
+      <div class="profile__card">
+        <div class="profile__left">
+          <label class="profile__avatar-wrapper" title="Изменить фото">
+            <input type="file" accept="image/*" class="profile__avatar-input" />
+            <img
+              src="/static/img/default-avatar.svg"
+              alt="Аватар"
+              class="profile__avatar"
+            />
+          </label>
+          <div class="profile__info">
+            <div class="profile__name" id="profileName">Имя пользователя</div>
+            <div class="profile__email" id="profileEmail">user@example.com</div>
+          </div>
+          <button class="profile__logout">Выйти</button>
+        </div>
+
+        <div class="profile__right">
+          <h2 class="profile__title">Личный кабинет</h2>
+
+          <div class="profile__fields">
+            <div class="profile__row">
+              <strong>Имя:</strong>
+              <span id="displayName">Имя пользователя</span>
+            </div>
+            <div class="profile__row">
+              <strong>Почта:</strong>
+              <span id="displayEmail">user@example.com</span>
+            </div>
+          </div>
+
+          <button class="profile__edit-toggle" id="editToggle">
+            Редактировать профиль
+          </button>
+
+          <form class="profile__form hidden" id="profileForm">
+            <label>
+              Имя:
+              <input type="text" id="editName" placeholder="Введите имя" />
+              <span class="profile__error" id="editNameError"></span>
+            </label>
+            <label>
+              Почта:
+              <input type="email" id="editEmail" placeholder="Введите email" />
+              <span class="profile__error" id="editEmailError"></span>
+            </label>
+            <label>
+              Новый пароль:
+              <input
+                type="password"
+                id="editPassword"
+                placeholder="Минимум 8 символов"
+              />
+              <span class="profile__error" id="editPasswordError"></span>
+            </label>
+            <label>
+              Подтвердите пароль:
+              <input
+                type="password"
+                id="editConfirm"
+                placeholder="Повторите пароль"
+              />
+              <span class="profile__error" id="editConfirmError"></span>
+            </label>
+            <button type="submit" class="profile__save-btn">
+              <span class="profile__button-text">Сохранить</span>
+              <span class="profile__loader hidden"></span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script src="/static/js/profile.js"></script>
+  </body>
+</html>

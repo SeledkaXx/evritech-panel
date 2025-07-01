@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Авторизация — Everytech CRM</title>
+    <link rel="stylesheet" href="/static/css/auth.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="theme-dark">
+    <div class="auth-container">
+      <div class="auth-card">
+        <img src="/static/img/logo.svg" alt="Everytech" class="auth-logo" />
+
+        <!-- Вход -->
+        <form id="loginForm" class="auth-form active">
+          <h2 class="auth-title">вход</h2>
+          <div class="auth-field">
+            <input type="email" id="loginEmail" placeholder="Email" required />
+            <span class="auth-error" id="loginEmailError"></span>
+          </div>
+          <div class="auth-field">
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Пароль"
+              required
+            />
+            <span class="auth-error" id="loginPasswordError"></span>
+          </div>
+          <button type="submit">
+            <span class="auth-button-text">войти</span>
+            <span class="auth-loader hidden"></span>
+          </button>
+          <p class="auth-switch">
+            Нет аккаунта? <a href="#" id="showRegister">Зарегистрироваться</a>
+          </p>
+        </form>
+
+        <!-- Регистрация -->
+        <form id="registerForm" class="auth-form">
+          <h2 class="auth-title">регистрация</h2>
+          <div class="auth-field">
+            <input type="text" id="registerName" placeholder="Имя" required />
+            <span class="auth-error" id="registerNameError"></span>
+          </div>
+          <div class="auth-field">
+            <input
+              type="email"
+              id="registerEmail"
+              placeholder="Email"
+              required
+            />
+            <span class="auth-error" id="registerEmailError"></span>
+          </div>
+          <div class="auth-field">
+            <input
+              type="password"
+              id="registerPassword"
+              placeholder="Пароль"
+              required
+            />
+            <span class="auth-error" id="registerPasswordError"></span>
+          </div>
+          <div class="auth-field">
+            <input
+              type="password"
+              id="registerConfirm"
+              placeholder="Подтвердите пароль"
+              required
+            />
+            <span class="auth-error" id="registerConfirmError"></span>
+          </div>
+          <button type="submit">
+            <span class="auth-button-text">зарегистрироваться</span>
+            <span class="auth-loader hidden"></span>
+          </button>
+          <p class="auth-switch">
+            Уже есть аккаунт? <a href="#" id="showLogin">Войти</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+  </body>
+</html>

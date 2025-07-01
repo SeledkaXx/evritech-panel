@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Сопровождение</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/support.css" />
+  </head>
+  <body class="theme--dark">
+    <header class="page-header">
+      <div class="page-header__logo">
+        <img
+          src="/static/img/logo.svg"
+          alt="Everytech logo"
+          class="page-header__logo-img"
+        />
+      </div>
+
+      <div class="page-header__menu">
+        <nav>
+          <ul class="page-header__menu-list">
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='dashboard'"
+            >
+              дашборд
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='analytics'"
+            >
+              аналитика
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='clients'"
+            >
+              клиенты
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='leads'">
+              лиды
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='tasks'">
+              задачи
+            </li>
+            <li
+              class="page-header__menu-item page-header__menu-item--active"
+              onclick="location.href='support'"
+            >
+              сопровождение
+            </li>
+          </ul>
+        </nav>
+
+        <div class="page-header__controls" onclick="location.href='profile'">
+          <button class="page-header__profile-btn">
+            <img
+              src="/static/img/profile_logo.svg"
+              alt="User logo"
+              class="page-header__profile-btn-icon"
+            />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="support-page">
+      <div class="support-page__header">
+        <div class="support-page__left-section">
+          <h1 class="support-page__title">сопровождение</h1>
+          <div class="support-page__controls">
+            <select id="statusFilter" class="support-page__filter">
+              <option value="">Все статусы</option>
+              <option value="1">В работе</option>
+              <option value="2">Заморожен</option>
+              <option value="3">Выполнено</option>
+            </select>
+            <button id="addSupportBtn" class="support-page__btn">
+              + Добавить сопровождение
+            </button>
+          </div>
+        </div>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Поиск по названию"
+          class="support-page__search"
+        />
+      </div>
+      <div class="support-page__table-container">
+        <table class="support-page__table">
+          <thead>
+            <tr>
+              <th>название</th>
+              <th>вложения</th>
+              <th>контакты</th>
+              <th>договор до</th>
+              <th>статус</th>
+              <th>действия</th>
+            </tr>
+          </thead>
+          <tbody id="supportList"></tbody>
+        </table>
+      </div>
+      <!-- Модалка добавления сопровождения -->
+      <div class="support-page__modal">
+        <div class="support-page__modal-content">
+          <h3 class="support-page__modal-title">добавить сопровождение</h3>
+          <input type="text" id="supportName" placeholder="Название" required />
+          <div class="support-page__modal-contacts">
+            <input type="email" id="supportEmail" placeholder="E-mail" />
+            <input type="tel" id="supportPhone" placeholder="Телефон" />
+          </div>
+          <div class="support-page__modal-contacts">
+            <select id="supportAccompaniment" required>
+              <!-- Изменение: supportAccompaniment вместо supportService -->
+              <option value="" disabled selected>Сопровождение</option>
+            </select>
+            <input type="number" id="supportPrice" placeholder="Стоимость" />
+          </div>
+          <label for="supportDeadline">
+            Договор до:
+            <input
+              type="date"
+              id="supportDeadline"
+              class="supportDeadline--display"
+            />
+          </label>
+          <div class="support-page__modal-info">
+            <select id="manager" required>
+              <!-- Изменение: manager вместо supportManager -->
+              <option value="" disabled selected>Ответственный</option>
+            </select>
+          </div>
+          <textarea
+            id="supportNotes"
+            placeholder="Комментарии/Заметки"
+          ></textarea>
+          <div class="support-page__modal-btn">
+            <button id="saveSupportBtn">добавить</button>
+            <button id="closeModalBtn">закрыть</button>
+          </div>
+        </div>
+      </div>
+      <!-- Модалка просмотра сопровождения -->
+      <div class="support-page__modal support-page__modal--view">
+        <div class="support-page__modal-content">
+          <h3 class="support-page__modal-title">просмотр сопровождения</h3>
+          <div class="support-page__modal-field">
+            <span class="support-page__modal-field-label">Название:</span>
+            <span
+              class="support-page__modal-field-value"
+              id="viewSupportName"
+            ></span>
+          </div>
+          <div class="support-page__modal-field">
+            <span class="support-page__modal-field-label">E-mail:</span>
+            <a
+              class="support-page__modal-field-value"
+              id="viewSupportEmail"
+              href="#"
+            ></a>
+          </div>
+          <div class="support-page__modal-field">
+            <span class="support-page__modal-field-label">Телефон:</span>
+            <a
+              class="support-page__modal-field-value"
+              id="viewSupportPhone"
+              href="#"
+            ></a>
+          </div>
+          <div class="support-page__modal-field">
+            <span class="support-page__modal-field-label">Сопровождение:</span>
+            <!-- Изменение: Сопровождение вместо Услуга -->
+            <span
+              class="support-page__modal-field-value"
+              id="viewSupportAccompaniment"
+            ></span>
+          </div>
+          <div class="support-page__modal-field">
+            <span class="support-page__modal-field-label">Стоимость:</span>
+            <span
+              class="support-page__modal-field-value"
+              id="viewSupportPrice"
+            ></span>
+          </div>
+          <div class="support-page__modal-field">
+            <span class="support-page__modal-field-label">Договор до:</span>
+            <span
+              class="support-page__modal-field-value"
+              id="viewSupportDeadline"
+            ></span>
+          </div>
+          <div class="support-page__modal-field">
+            <span class="support-page__modal-field-label">Ответственный:</span>
+            <span
+              class="support-page__modal-field-value"
+              id="viewManager"
+            ></span>
+          </div>
+          <div class="support-page__modal-field">
+            <span class="support-page__modal-field-label">Статус:</span>
+            <span
+              class="support-page__modal-field-value"
+              id="viewSupportStatus"
+            ></span>
+          </div>
+          <div class="support-page__modal-field">
+            <span class="support-page__modal-field-label">Дата создания:</span>
+            <span
+              class="support-page__modal-field-value"
+              id="viewSupportCreatedDate"
+            ></span>
+          </div>
+          <div
+            class="support-page__modal-field support-page__modal-field--notes"
+          >
+            <span class="support-page__modal-field-label"
+              >Комментарии/Заметки:</span
+            >
+            <span
+              class="support-page__modal-field-value"
+              id="viewSupportNotes"
+            ></span>
+          </div>
+          <div class="support-page__modal-btn">
+            <button id="closeViewModalBtn">закрыть</button>
+          </div>
+        </div>
+      </div>
+      <!-- Модалка редактирования сопровождения -->
+      <div class="support-page__modal support-page__modal--edit">
+        <div class="support-page__modal-content">
+          <h3 class="support-page__modal-title">редактировать</h3>
+          <input
+            type="text"
+            id="editSupportName"
+            placeholder="Название"
+            required
+          />
+          <div class="support-page__modal-contacts">
+            <input type="email" id="editSupportEmail" placeholder="E-mail" />
+            <input type="tel" id="editSupportPhone" placeholder="Телефон" />
+          </div>
+          <div class="support-page__modal-contacts">
+            <select id="editSupportAccompanimentId" required>
+              <!-- Изменение: editSupportAccompaniment вместо editSupportService -->
+              <option value="" disabled selected>Сопровождение</option>
+            </select>
+            <input
+              type="number"
+              id="editSupportPrice"
+              placeholder="Стоимость"
+            />
+          </div>
+          <label for="editSupportDeadline">
+            Договор до:
+            <input
+              class="supportDeadline--display"
+              type="date"
+              id="editSupportDeadline"
+            />
+          </label>
+          <div class="support-page__modal-info">
+            <select id="editSupportUser" required>
+              <!-- Изменение: editSupportUser вместо editSupportManager -->
+              <option value="" disabled selected>Ответственный</option>
+            </select>
+          </div>
+          <textarea
+            id="editSupportNotes"
+            placeholder="Комментарии/Заметки"
+          ></textarea>
+          <div class="support-page__modal-btn">
+            <button id="saveEditSupportBtn">сохранить</button>
+            <button id="closeEditModalBtn">отмена</button>
+          </div>
+        </div>
+      </div>
+      <!-- Модалка подтверждения удаления -->
+      <div class="support-page__modal support-page__modal--delete">
+        <div class="support-page__modal-content">
+          <h3 class="support-page__modal-title">подтверждение удаления</h3>
+          <p class="support-page__modal-message">
+            Вы уверены, что хотите удалить это сопровождение?
+          </p>
+          <div class="support-page__modal-btn">
+            <button
+              id="confirmDeleteBtn"
+              class="support-page__modal-btn--danger"
+            >
+              удалить
+            </button>
+            <button id="cancelDeleteBtn">отмена</button>
+          </div>
+        </div>
+      </div>
+      <!-- Модалка вложений -->
+      <div class="support-page__modal support-page__modal--attachments">
+        <div class="support-page__modal-content" id="attachmentsContent">
+          <h3 class="support-page__modal-title">вложения</h3>
+          <div id="attachmentsList"></div>
+          <div class="support-page__modal-btn">
+            <button id="addAttachmentBtn">добавить</button>
+            <button id="closeAttachmentsModalBtn">закрыть</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="/static/js/support.js"></script>
+  </body>
+</html>

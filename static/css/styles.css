@@ -1,0 +1,828 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  padding: 2rem 2rem 0 2rem;
+  background-color: #182f39;
+  font-family: "Montserrat", sans-serif;
+}
+
+.page-header {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.page-header__logo-img {
+  height: 40px;
+  width: 210px;
+}
+
+.page-header__menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2rem;
+  background-color: #0c2936;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  height: 60px;
+}
+
+.page-header__menu-list {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.page-header__menu-item {
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.page-header__menu-item:hover {
+  color: #fff;
+}
+
+.page-header__menu-item--active {
+  background-color: #b9d043;
+  color: #0c2936;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.4rem 1.5rem;
+  align-self: center;
+}
+
+.page-header__controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.page-header__profile-btn {
+  width: 45px;
+  height: 45px;
+
+  position: relative;
+  border-radius: 30px;
+  background-color: #2e3b46;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.page-header__profile-btn:hover {
+  background-color: #06171e;
+}
+
+.page-header__profile-btn-icon {
+  width: 35px;
+  height: 35px;
+  padding-top: 5px;
+}
+
+/* ----------------------------------------------------------------------------------- */
+
+/* ============================ */
+/* 4. DASHBOARD MAIN CONTAINER */
+/* ============================ */
+
+.dashboard {
+  padding: 2rem 1.5rem;
+  margin: 1rem 0 0 0;
+  background-color: #0c2936;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 805px;
+}
+.dashboard__row {
+  display: flex;
+  gap: 20px;
+}
+
+/* ===================== */
+/* 4.1 PANEL STYLES */
+/* ===================== */
+
+.panel {
+  position: relative;
+  background-color: #0c2936;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 770px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+/* Заголовок панели */
+.panel__header-line {
+  position: absolute;
+  top: -14px;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+}
+.panel__title {
+  background-color: #b9d043;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #0f2734;
+}
+/* Кнопка добавления */
+.panel__add {
+  background-color: #2d4049;
+  border: none;
+  color: #b9d043;
+  font-size: 1.5rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Тело панели */
+.panel__body {
+  margin-top: 1.5rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+.panel__body::-webkit-scrollbar {
+  width: 6px;
+}
+.panel__body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+.panel__body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Список элементов панели */
+.panel__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Элементы списка (лид, клиент, поддержка) */
+.panel__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #1a2d38;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 39px;
+}
+.panel__item:hover {
+  background-color: #233945;
+}
+
+/* ----------------------------------------- */
+
+/* ========================== */
+/* 4.2 LEADS PANEL */
+/* ========================== */
+
+.panel--leads .panel__body {
+  max-height: 300px;
+  overflow-y: auto;
+  border-radius: 12px;
+}
+
+.leads__table {
+  display: flex;
+  flex-direction: column;
+}
+
+.lead__item {
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  color: white;
+  gap: 0.8rem;
+}
+
+/* Элементы лидов */
+.lead__title,
+.lead__request,
+.lead__priority,
+.lead__deadline {
+  font-weight: normal;
+  font-size: 1rem;
+  text-align: left;
+  padding: 0.7rem 1rem;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #2c3f48;
+}
+.lead__title {
+  width: 190px;
+  text-align: left;
+}
+.lead__request {
+  width: 170px;
+}
+.lead__priority {
+  width: 80px;
+}
+.lead__deadline {
+  width: 90px;
+}
+.lead__status {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.lead__status img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Стилизация скроллбара */
+.panel--leads .panel__body::-webkit-scrollbar {
+  width: 6px;
+}
+.panel--leads .panel__body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+.panel--leads .panel__body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ---------------------------------------------- */
+
+/* ========================== */
+/* 4.3 CLIENTS PANEL */
+/* ========================== */
+
+.panel--clients .panel__body {
+  max-height: 300px;
+  overflow-y: auto;
+  border-radius: 12px;
+}
+
+.clients__table {
+  display: flex;
+  flex-direction: column;
+}
+
+.client__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-size: 14px;
+  gap: 0.8rem;
+}
+
+.client__title,
+.client__service,
+.client__priority,
+.client__deadline {
+  font-weight: normal;
+  font-size: 1rem;
+  text-align: left;
+  padding: 0.7rem 1rem;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #2c3f48;
+}
+
+.client__title {
+  width: 190px;
+  text-align: left;
+}
+
+.client__service {
+  width: 170px;
+}
+
+.client__priority {
+  width: 80px;
+}
+
+.client__deadline {
+  width: 90px;
+}
+
+/* Скроллбар */
+.panel--clients .panel__body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel--clients .panel__body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.panel--clients .panel__body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ----------------------------------------- */
+
+/* ========================== */
+/* 4.4 CLOCK CARD */
+/* ========================== */
+
+.clock-card {
+  width: 250px;
+
+  border-radius: 16px;
+  overflow: hidden;
+  background-image: url("../img/clock-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  height: 320px;
+}
+.clock-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: "Jersey 10", sans-serif;
+  text-shadow: 0 0 2px #000;
+}
+.clock-card__time {
+  font-size: 5.5rem;
+  font-weight: 100;
+  letter-spacing: 5px;
+  margin-bottom: 0.5rem;
+  font-family: "Jersey 10", sans-serif !important;
+}
+.clock-card__date {
+  font-size: 2rem;
+}
+
+/* ------------------------------------------ */
+
+/* ========================== */
+/* 4.5 TASKS PANEL */
+/* ========================== */
+
+.index-page .panel--tasks {
+  max-width: 375px;
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 420px;
+  padding: 1rem;
+}
+.index-page .task__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.index-page .task__list::-webkit-scrollbar {
+  width: 6px;
+}
+.index-page .task__list::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+.index-page .task__list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.index-page .task__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1a2d38;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 15px;
+  color: #fff;
+  position: relative;
+  transition: background-color 0.3s ease;
+  height: 30px;
+  cursor: pointer;
+}
+.index-page .task__item:hover {
+  background-color: #233945;
+}
+.index-page .task__item--shared {
+  background-color: #213844;
+}
+.index-page .task__text {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: transform 0.3s ease;
+}
+.index-page .task__item:hover .task__text {
+  transform: translateX(-10px);
+}
+.index-page .task__right {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.index-page .task__btn {
+  background-color: #b9d043;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+.index-page .task__item:hover .task__btn {
+  opacity: 1;
+}
+.index-page .task__btn img {
+  width: 20px;
+  height: 20px;
+}
+.index-page .task__checkbox {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #b9d043;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+.index-page .task__checkbox:not(.task__checkbox--done) img {
+  display: none;
+}
+.index-page .task__checkbox--done {
+  background-color: #b9d043;
+}
+.index-page .task__checkbox--done img {
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+}
+
+/* ----------------------------------------- */
+
+/* ------------------------------------------------- */
+
+/* ========================== */
+/* 4.6 CALCULATOR PANEL */
+/* ========================== */
+
+.panel--calculator {
+  max-width: 440px;
+  width: 100%;
+  height: 388px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: 2rem 1rem;
+}
+.calc__scroll-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-right: 4px;
+  max-height: 300px; /* Фиксированная высота с прокруткой */
+
+  border-radius: 12px;
+}
+.calc__scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+.calc__scroll-area::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+.calc__scroll-area::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.calc__row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.calc__input {
+  background-color: #1a2d38;
+  border: none;
+  border-radius: 20px;
+  padding: 0.6rem 1rem;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+.calc__input--name {
+  flex: 2;
+  height: 1.1rem;
+}
+.calc__input--price {
+  max-width: 130px;
+  text-align: center;
+  height: 1.1rem;
+}
+.calc__delete {
+  background-color: #b9d043;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.calc__delete img {
+  width: 20px;
+  height: 20px;
+}
+.calc__footer {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 0.5rem;
+}
+.calc__left-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.calc__switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #fff;
+}
+.calc__switch input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #b9d043;
+  background-color: #1a2d38;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+.calc__switch input[type="checkbox"]:checked {
+  background-color: #b9d043;
+}
+.calc__switch input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 4px;
+  top: 0px;
+  width: 5px;
+  height: 10px;
+  border: solid #0f2734;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.calc__switch input[type="checkbox"]:checked::after {
+  display: block;
+}
+.calc__advanced {
+  display: none;
+  margin-top: 0.5rem;
+}
+.calc__advanced label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ccc;
+  font-size: 1.2rem;
+}
+.calc__advanced input {
+  background-color: #2d4049;
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  width: 80px;
+}
+.calc__total {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.calc__label {
+  background-color: #b9d043;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  color: #0f2734;
+  font-weight: 500;
+  font-size: 1.2rem;
+  height: 1.5rem;
+}
+.calc__sum {
+  background-color: #2d4049;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  color: #b9d043;
+  font-weight: 500;
+  font-size: 1rem;
+  height: 1.5rem;
+  width: 100px;
+}
+.calc__pdf-btn {
+  background-color: #2d4049;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  height: 50px;
+  margin-top: 30px;
+}
+
+.calc__pdf-btn:hover {
+  color: #b9d043;
+}
+
+/* -------------------------------------------------- */
+
+/* ========================== */
+/* 4.7 SUPPORT PANEL */
+/* ========================== */
+
+.index-page .panel--support {
+  margin-top: 16px;
+  height: 452px;
+}
+
+.index-page .panel--support .panel__body {
+  overflow-y: auto;
+  border-radius: 12px;
+}
+
+.index-page .support__table {
+  display: flex;
+  flex-direction: column;
+}
+
+.index-page .support__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 20px;
+  padding: 0.7rem 1rem;
+  color: white;
+  font-size: 1rem;
+  gap: 0.8rem;
+}
+
+.index-page .support__client,
+.index-page .support__accompaniment,
+.index-page .support__date,
+.index-page .support__status {
+  font-weight: normal;
+  padding: 0.7rem 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  background-color: #2c3f48;
+  border-radius: 20px;
+  height: 1.1rem;
+}
+
+.index-page .support__client {
+  width: 210px;
+  text-align: left;
+}
+
+.index-page .support__accompaniment {
+  width: 200px;
+}
+
+.index-page .support__date {
+  width: 120px;
+}
+
+.index-page .support__status {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.index-page .support__status img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.index-page .panel--support .panel__body::-webkit-scrollbar {
+  width: 6px;
+}
+.index-page .panel--support .panel__body::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+.index-page .panel--support .panel__body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ========================== */
+/* 4.8 APPS PANEL */
+/* ========================== */
+
+.panel__header-line--apps {
+  position: absolute;
+  top: -14px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+}
+
+.panel--apps {
+  max-width: 110px;
+  width: 100%;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  height: 437px;
+}
+.apps__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 1.3rem;
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+.app__icon {
+  background-color: #1a2d38;
+  border-radius: 50px;
+  width: 18px;
+  height: 18px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+.app__icon:hover {
+  background-color: #2d4049;
+}
+.app__icon img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  /* filter: brightness(0) invert(1); */
+}

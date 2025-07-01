@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Аналитика</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="stylesheet" href="/static/css/analytics.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.min.js"></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="page-header__logo">
+        <img
+          src="/static/img/logo.svg"
+          alt="Everytech logo"
+          class="page-header__logo-img"
+        />
+      </div>
+
+      <div class="page-header__menu">
+        <nav>
+          <ul class="page-header__menu-list">
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='dashboard'"
+            >
+              дашборд
+            </li>
+            <li
+              class="page-header__menu-item page-header__menu-item--active"
+              onclick="location.href='analytics'"
+            >
+              аналитика
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='clients'"
+            >
+              клиенты
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='leads'">
+              лиды
+            </li>
+            <li class="page-header__menu-item" onclick="location.href='tasks'">
+              задачи
+            </li>
+            <li
+              class="page-header__menu-item"
+              onclick="location.href='support'"
+            >
+              сопровождение
+            </li>
+          </ul>
+        </nav>
+
+        <div class="page-header__controls" onclick="location.href='profile'">
+          <button class="page-header__profile-btn">
+            <img
+              src="/static/img/profile_logo.svg"
+              alt="User logo"
+              class="page-header__profile-btn-icon"
+            />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="filters">
+        <div class="filter-group">
+          <label for="date-from">С:</label>
+          <input type="date" id="date-from" value="2025-05-12" />
+        </div>
+        <div class="filter-group">
+          <label for="date-to">По:</label>
+          <input type="date" id="date-to" value="2025-06-13" />
+        </div>
+        <div class="filter-group">
+          <label for="user-filter">Ответственный:</label>
+          <select id="user-filter">
+            <option value="">Все</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="data-type">Тип данных:</label>
+          <select id="data-type">
+            <option value="leads">Лиды</option>
+            <option value="clients">Клиенты</option>
+            <option value="supports">Сопровождения</option>
+            <option value="tasks">Задачи</option>
+          </select>
+        </div>
+        <button id="apply-filters">Применить</button>
+      </section>
+      <section class="metrics">
+        <div class="metric-card">
+          <h3>Лиды</h3>
+          <p id="leads-count">0</p>
+        </div>
+        <div class="metric-card">
+          <h3>Клиенты</h3>
+          <p id="clients-count">0</p>
+        </div>
+        <div class="metric-card">
+          <h3>Сопровождения</h3>
+          <p id="supports-count">0</p>
+        </div>
+        <div class="metric-card">
+          <h3>Задачи</h3>
+          <p id="tasks-count">0</p>
+        </div>
+        <div class="metric-card">
+          <h3>Активные задачи</h3>
+          <p id="active-tasks">0</p>
+        </div>
+        <div class="metric-card">
+          <h3>Сумма цен</h3>
+          <p id="total-price">0 ₽</p>
+        </div>
+        <div class="metric-card">
+          <h3>Прогресс задач</h3>
+          <p id="tasks-progress">0%</p>
+        </div>
+      </section>
+      <section class="charts">
+        <div class="chart-container">
+          <h3>Статусы</h3>
+          <canvas id="status-chart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>Лиды по источникам</h3>
+          <canvas id="source-chart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>Просроченные дедлайны</h3>
+          <canvas id="overdue-chart"></canvas>
+        </div>
+      </section>
+      <!-- <button id="export-pdf" class="btn">Экспорт в PDF</button> -->
+    </main>
+
+    <script defer src="/static/js/analytics.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>

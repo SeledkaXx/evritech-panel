@@ -1,0 +1,152 @@
+body {
+  padding: 2rem 2rem 0 2rem;
+  background-color: #182f39;
+  font-family: "Montserrat", sans-serif;
+}
+
+.main {
+  font-family: "Montserrat", sans-serif;
+  background-color: #0c2936;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  margin-top: 3rem;
+  padding: 1rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  padding: 1rem;
+  border-radius: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.filter-group input,
+.filter-group select {
+  padding: 0.5rem;
+  border: 1px solid #b9d043;
+  background: #2c3f48;
+  color: #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+#apply-filters,
+.btn {
+  padding: 0.5rem 1rem;
+  background: #b9d043;
+  color: #161616;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: #25353d;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 70px;
+}
+
+.metric-card h3 {
+  margin: 0 0 1rem;
+  font-size: 1.3rem;
+  color: #ccc;
+}
+
+.metric-card p {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #b9d043;
+}
+
+.metric-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.metric-card ul li {
+  /* margin: 0.5rem 0; */
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  /* Убрано max-height и overflow-y для адаптации */
+}
+
+.chart-container {
+  background: #25353d;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 300px; /* Минимальная высота для равномерности */
+  height: auto; /* Адаптивная высота */
+  /* Убрано max-height: 500px и overflow: hidden */
+}
+
+.chart-container h3 {
+  margin: 0 0 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #ccc;
+}
+
+canvas {
+  max-width: 100%;
+  height: 400px !important;
+  max-height: none; /* Убрано ограничение максимальной высоты */
+}
+
+#export-pdf {
+  display: block;
+  margin: 2rem auto;
+}
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+  }
+  .metrics,
+  .charts {
+    grid-template-columns: 1fr;
+  }
+  .nav a {
+    margin: 0 0.5rem;
+    padding: 0.3rem 0.8rem;
+  }
+  .main {
+    padding: 1rem;
+  }
+}
