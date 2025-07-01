@@ -14,6 +14,11 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    "connect_args": {
+        "sslmode": "require"
+    }
+}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.secret_key = "your-secret-key"
