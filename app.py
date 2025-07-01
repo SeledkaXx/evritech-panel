@@ -9,6 +9,8 @@ from datetime import datetime, timedelta
 from sqlalchemy.sql.sqltypes import Date
 from sqlalchemy import func, and_, or_
 from models import db, User, Source, Priority, Status, Lead, Service, Client, Attachment, Accompaniment, Support, TaskStatus, Task
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
