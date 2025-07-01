@@ -11,7 +11,7 @@ from sqlalchemy import func, and_, or_
 from models import db, User, Source, Priority, Status, Lead, Service, Client, Attachment, Accompaniment, Support, TaskStatus, Task
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1@localhost/evr_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.secret_key = "your-secret-key"
